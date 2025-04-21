@@ -40,18 +40,20 @@ dnf install mongodb-org -y &>> $LOGFILE
 
 VALIDATE $? "installing MongoDB"
 
-systemctl enable mongodb
+systemctl enable mongod &>> $LOGFILE
 
 VALIDATE $? "enabling MongoDB service"
 
-systemctl start mongodb
+systemctl start mongod &>> $LOGFILE
 
 VALIDATE $? "starting MongoDB service"
 
-sed -i 's/127.0.0.1/0.0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE   #sed command is used to find and replace the IP address in the config file
+sed -i 's/127.0.0.1/0.0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE  
+
+ #sed command is used to find and replace the IP address in the config file
 
 VALIDATE $? "updating MongoDB config file to allow remote access"
 
-systemctl restart mongodb &>> $LOGFILE
+systemctl restart mongod &>> $LOGFILE
 
 VALIDATE $? "restarting MongoDB service"
