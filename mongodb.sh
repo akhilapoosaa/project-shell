@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#
+#using mongodb repo to install mongodb
+#mongodb is a NoSQL database, it is used to store data in JSON format
 
 ID=$(id -u)
 R="\e[31m"
@@ -34,3 +35,23 @@ fi
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "copying mongo.repo file to /etc/yum.repos.d/ directory"
+
+dnf install mongodb-org -y &>> $LOGFILE
+
+VALIDATE $? "installing MongoDB"
+
+systemctl enable mongodb
+
+VALIDATE $? "enabling MongoDB service"
+
+systemctl start mongodb
+
+VALIDATE $? "starting MongoDB service"
+
+sed -i 's/127.0.0.1/0.0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE   #sed command is used to find and replace the IP address in the config file
+
+VALIDATE $? "updating MongoDB config file to allow remote access"
+
+systemctl restart mongodb &>> $LOGFILE
+
+VALIDATE $? "restarting MongoDB service"
