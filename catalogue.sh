@@ -101,7 +101,7 @@ mongo --host $MONGODB_HOST </app/schema/catalogue.js
 #running the mongo command to import the schema file into the mongodb database
 #--host option is used to specify the host name of the mongodb server
 
-VALIDATE $? "loading catalogue schema into mongodb" &>> $LOGFILE
+VALIDATE $? "loading catalogue schema into mongodb"
 
 
 
