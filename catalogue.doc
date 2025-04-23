@@ -44,6 +44,7 @@ We need to setup a new service in systemd so systemctl can manage this service
 Setup SystemD Catalogue Service
 
 vim /etc/systemd/system/catalogue.service
+
 [Unit]
 Description = Catalogue Service
 
@@ -56,7 +57,8 @@ SyslogIdentifier=catalogue
 
 [Install]
 WantedBy=multi-user.target
-Load the service.
+
+Load the service........
 
 systemctl daemon-reload
 Start the service.
@@ -71,12 +73,14 @@ We need to load the schema. To load schema we need to install mongodb client.
 To have it installed we can setup MongoDB repo and install mongodb-client
 
 vim /etc/yum.repos.d/mongo.repo
+
 [mongodb-org-4.2]
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
 gpgcheck=0
 enabled=1
 dnf install mongodb-org-shell -y
+
 Load Schema
 
 mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
