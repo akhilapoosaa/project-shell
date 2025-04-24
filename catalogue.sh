@@ -44,11 +44,16 @@ dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "installing nodejs 18" 
 
 #Application User Setup
-useradd roboshop &>> $LOGFILE
-VALIDATE $? "creating roboshop user" 
-#useradd command is used to create a new user in the system
+id roboshop &>> $LOGFILE
+if [ $? -ne 0 ]; 
+then
+    useradd roboshop &>> $LOGFILE
+    VALIDATE $? "Creating roboshop user"
+else
+    echo -e "roboshop user already exists ... $Y SKIPPED $N" 
+fi
 
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE #-p option is used to create the directory if it does not exist
 VALIDATE $? "creating app directory" 
 
 #download and extract catalogue app
@@ -59,7 +64,7 @@ VALIDATE $? "downloading catalogue application zip file"
 # /tmp/catalogue.zip is the output file name
 
 cd /app
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE # -o option is used to overwrite the existing files 
 VALIDATE $? "unzipping catalogue application zip file" 
 
 #npm is a package manager for JavaScript and is used to install the required packages for the application
@@ -96,8 +101,9 @@ VALIDATE $? "installing mongodb client"
 mongo --host $MONGODB_HOST </app/schema/catalogue.js  &>> $LOGFILE
 #running the mongo command to import the schema file into the mongodb database
 #--host option is used to specify the host name of the mongodb server
-VALIDATE $? "loading catalogue schema into mongodb"  &>> $LOGFILE
+VALIDATE $? "loading catalogue schema into mongodb"  
 
+echo -e "$G Catalogue service setup complete! $N" #-e is used to enable the interpretation of backslash escapes
 
 
 
