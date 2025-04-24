@@ -9,6 +9,7 @@ Start & Enable Nginx service
 
 systemctl enable nginx
 systemctl start nginx
+
 Try to access the service once over the browser and ensure you get some default content.
 
 http://<public-IP>:80
