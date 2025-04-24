@@ -85,24 +85,6 @@ VALIDATE $? "enabling cart service"
 systemctl start cart &>> $LOGFILE
 VALIDATE $? "starting cart service"  
 
-#mongoDB client setup
-cp $SCRIPT_DIR/mongo.repo  /etc/yum.repos.d/mongo.repo  &>> $LOGFILE
-#copying the mongo repo file to the yum repository directory
-VALIDATE $? "copying mongodb repo file" 
-
-dnf clean all &>> $LOGFILE
-dnf makecache &>> $LOGFILE
-
-dnf install mongodb-org-shell -y  &>> $LOGFILE
-#installing the mongodb shell
-VALIDATE $? "installing mongodb client"  
-
-mongo --host $MONGODB_HOST </app/schema/catalogue.js  &>> $LOGFILE
-#running the mongo command to import the schema file into the mongodb database
-#--host option is used to specify the host name of the mongodb server
-VALIDATE $? "loading catalogue schema into mongodb"  
-
-echo -e "$G Catalogue service setup complete! $N" #-e is used to enable the interpretation of backslash escapes
 
 
 
