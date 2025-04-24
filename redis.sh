@@ -13,7 +13,7 @@ N="\e[0m"
 TIMESTAMP=$(date '+%F-%H-%M-%S') 
 LOGFILE="/tmp/$0-$TIMESTAMP.log" 
 exec &>$LOGFILE #executes the command and redirects the output to the log file
-SCRIPT_DIR=$(pwd)
+
 #stores the log file in the /tmp directory with the name of the script and the timestamp
 
 echo "script started executing at $TIMESTAMP" &>> $LOGFILE
@@ -44,8 +44,8 @@ VALIDATE $? "enabling redis module"
 dnf install redis -y 
 VALIDATE $? "installing redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
-sed -i 's/protected-mode yes/protected-mode no/g' /etc/redis/redis.conf
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+sed -i 's/protected-mode yes/protected-mode no/' /etc/redis/redis.conf
 VALIDATE $? "updating redis config file to allow remote connections"
 
 systemctl enable redis 
