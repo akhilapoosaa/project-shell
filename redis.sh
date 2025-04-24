@@ -44,7 +44,7 @@ VALIDATE $? "enabling redis module"
 dnf install redis -y 
 VALIDATE $? "installing redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf
 sed -i 's/protected-mode yes/protected-mode no/' /etc/redis/redis.conf
 VALIDATE $? "updating redis config file to allow remote connections"
 
