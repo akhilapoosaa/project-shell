@@ -94,7 +94,7 @@ VALIDATE $? "copying mongodb repo file"
 dnf clean all &>> $LOGFILE
 dnf makecache &>> $LOGFILE
 
-dnf install -y mongodb-org  &>> $LOGFILE
+dnf install mongodb-org-shell -y  &>> $LOGFILE
 #installing the mongodb shell
 VALIDATE $? "installing mongodb client"  
 
