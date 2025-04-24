@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#user service setup script
+#catalogue service setup script
 
 ID=$(id -u)
 R="\e[31m"
@@ -8,7 +8,6 @@ G="\e[32m"
 Y="\e[33m"      
 N="\e[0m" 
 
-MONGODB_HOST=mongod.abcompanies.store
 TIMESTAMP=$(date '+%F-%H-%M-%S') 
 LOGFILE="/tmp/$0-$TIMESTAMP.log"  
 SCRIPT_DIR=$(pwd)
@@ -56,31 +55,35 @@ fi
 mkdir -p /app &>> $LOGFILE #-p option is used to create the directory if it does not exist
 VALIDATE $? "creating app directory" 
 
-#download and extract user app
-curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip  &>> $LOGFILE
-VALIDATE $? "downloading user application zip file" 
+#download and extract catalogue app
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip  &>> $LOGFILE
+VALIDATE $? "downloading cart application zip file" 
 #curl command is used to download the zip file from the given URL
 # -o option is used to specify the output file name
-# /tmp/user.zip is the output file name
+# /tmp/catalogue.zip is the output file name
 
 cd /app
-unzip -o /tmp/user.zip &>> $LOGFILE # -o option is used to overwrite the existing files 
-VALIDATE $? "unzipping user application zip file" 
+unzip -o /tmp/cart.zip &>> $LOGFILE # -o option is used to overwrite the existing files 
+VALIDATE $? "unzipping cart application zip file" 
 
 #npm is a package manager for JavaScript and is used to install the required packages for the application
 npm install &>> $LOGFILE
-VALIDATE $? "installing user application dependencies" 
+VALIDATE $? "installing cart application dependencies" 
 
-cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service &>> $LOGFILE
+#systemd service setup
+cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service  &>> $LOGFILE
+#copying the catalogue service file to the systemd directory
+#systemd is a system and service manager for Linux operating systems
+VALIDATE $? "copying cart service file"
 
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? "reloading systemd daemon" 
 
-systemctl enable user &>> $LOGFILE
-VALIDATE $? "enabling user service" 
+systemctl enable cart &>> $LOGFILE
+VALIDATE $? "enabling cart service" 
 
-systemctl start user &>> $LOGFILE
-VALIDATE $? "starting user service"  
+systemctl start cart &>> $LOGFILE
+VALIDATE $? "starting cart service"  
 
 #mongoDB client setup
 cp $SCRIPT_DIR/mongo.repo  /etc/yum.repos.d/mongo.repo  &>> $LOGFILE
@@ -94,9 +97,12 @@ dnf install mongodb-org-shell -y  &>> $LOGFILE
 #installing the mongodb shell
 VALIDATE $? "installing mongodb client"  
 
-mongo --host $MONGODB_HOST </app/schema/user.js  &>> $LOGFILE
+mongo --host $MONGODB_HOST </app/schema/catalogue.js  &>> $LOGFILE
 #running the mongo command to import the schema file into the mongodb database
 #--host option is used to specify the host name of the mongodb server
-VALIDATE $? "loading user schema into mongodb"  
+VALIDATE $? "loading catalogue schema into mongodb"  
 
-echo -e "$G user service setup complete! $N" #-e is used to enable the interpretation of backslash escapes
+echo -e "$G Catalogue service setup complete! $N" #-e is used to enable the interpretation of backslash escapes
+
+
+
