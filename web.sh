@@ -32,8 +32,7 @@ else
     echo -e "$G SUCCESS:: script is running with root access $N"
 fi 
 
-dnf install ngnix -y &>> $LOGFILE
-
+dnf install nginx -y &>> $LOGFILE
 VALIDATE $? "installing nginx"
 #nginx is a web server that can be used to serve static files and also act as a reverse proxy server
 #nginx is used to serve the frontend application and also act as a reverse proxy server for the backend application
@@ -58,8 +57,14 @@ VALIDATE $? "moving ngnx html directory"
 unzip -o /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "unzipping web application"
 
+mkdir -p /etc/nginx/default.d &>> $LOGFILE  
+VALIDATE $? "ensuring nginx default.d directory exists"
+
 cp $SCRIPT_DIR/roboshop.conf   /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 VALIDATE $? "copying roboshop.conf file to nginx default directory"
+
+nginx -t &>> $LOGFILE
+VALIDATE $? "validating nginx configuration"
 
 systemctl restart nginx &>> $LOGFILE
 VALIDATE $? "restarting nginx service"
