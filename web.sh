@@ -49,17 +49,17 @@ rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 #nginx default document root is /usr/share/nginx/html
 VALIDATE $? "removing default nginx website"
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
 VALIDATE $? "downloading web application zip file"
 #curl command is used to download the web application zip file from the s3 bucket
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html &>> $LOGFILE
 VALIDATE $? "moving ngnx html directory"
 
-unzip -o /tmp/web.zip
+unzip -o /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "unzipping web application"
 
-cp $SCRIPT_DIR/roboshop.conf   /etc/nginx/default.d/roboshop.conf 
+cp $SCRIPT_DIR/roboshop.conf   /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 VALIDATE $? "copying roboshop.conf file to nginx default directory"
 
 systemctl restart nginx &>> $LOGFILE
