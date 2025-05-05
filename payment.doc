@@ -4,6 +4,7 @@ This service is responsible for payments in RoboShop e-commerce app. This servic
 Install Python 3.6
 
 dnf install python36 gcc python3-devel -y
+
 Configure the application.
 
 Add application User
@@ -28,6 +29,7 @@ We need to setup a new service in systemd so systemctl can manage this service
 Setup SystemD Payment Service
 
 vim /etc/systemd/system/payment.service
+
 [Unit]
 Description=Payment Service
 
@@ -48,6 +50,7 @@ SyslogIdentifier=payment
 
 [Install]
 WantedBy=multi-user.target
+
 Load the service.
 
 systemctl daemon-reload

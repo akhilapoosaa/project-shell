@@ -19,6 +19,7 @@ Download the application code to created app directory.
 curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip
 cd /app
 unzip /tmp/shipping.zip
+
 Every application is developed by development team will have some common softwares that they use as libraries. This application also have the same way of defined dependencies in the application configuration.
 
 Lets download the dependencies & build the application
@@ -31,6 +32,7 @@ We need to setup a new service in systemd so systemctl can manage this service
 Setup SystemD Shipping Service
 
 /etc/systemd/system/shipping.service
+
 [Unit]
 Description=Shipping Service
 
@@ -43,6 +45,7 @@ SyslogIdentifier=shipping
 
 [Install]
 WantedBy=multi-user.target
+
 Load the service.
 
 systemctl daemon-reload
