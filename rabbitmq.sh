@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 #rabbitmq service setup script
 # This script is used to set up the RabbitMQ service for the Roboshop application.
 # It installs the RabbitMQ server, enables the RabbitMQ management plugin, and starts the RabbitMQ service.
@@ -12,6 +10,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"      
 N="\e[0m" 
+MONGODB_HOST=mongodb.abcompanies.store
 
 TIMESTAMP=$(date '+%F-%H-%M-%S') 
 LOGFILE="/tmp/$0-$TIMESTAMP.log"  
