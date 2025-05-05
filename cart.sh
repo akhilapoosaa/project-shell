@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#catalogue service setup script
+#cart service setup script
 
 ID=$(id -u)
 R="\e[31m"
@@ -44,7 +44,7 @@ VALIDATE $? "installing nodejs 18"
 
 #Application User Setup
 id roboshop &>> $LOGFILE
-if [ $? -ne 0 ]; 
+if [ $? -ne 0 ]
 then
     useradd roboshop &>> $LOGFILE
     VALIDATE $? "Creating roboshop user"

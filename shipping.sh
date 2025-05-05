@@ -89,7 +89,7 @@ VALIDATE $? "installing mysql"
 #MySQL is a relational database management system based on SQL (Structured Query Language).
 #It is used to store the data for the shipping application and act as a backend database for the application.
 
-mysql -h mysql-dev.devopsb73.online -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
+mysql -h mysql.abcompanies.store -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
 VALIDATE $? "importing shipping application schema"
 #mysql command is used to connect to the MySQL server and execute the SQL script to create the database and tables for the shipping application
 #-h option is used to specify the host name of the MySQL server

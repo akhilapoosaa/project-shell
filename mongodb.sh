@@ -33,27 +33,20 @@ else
 fi 
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
-
 VALIDATE $? "copying MongoDB repo file" 
 
 dnf install mongodb-org -y &>> $LOGFILE
-
 VALIDATE $? "installing MongoDB"    
 
 systemctl enable mongod &>> $LOGFILE
-
 VALIDATE $? "enabling MongoDB service"
 
 systemctl start mongod &>> $LOGFILE
-
 VALIDATE $? "starting MongoDB service"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE  
-
- #sed command is used to find and replace the IP address in the config file
-
+#sed command is used to find and replace the IP address in the config file
 VALIDATE $? "updating MongoDB config file to allow remote access"
 
 systemctl restart mongod &>> $LOGFILE
-
 VALIDATE $? "restarting MongoDB service"
