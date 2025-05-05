@@ -11,6 +11,7 @@ Environment=USER_PORT=8080
 Environment=AMQP_HOST=rabbitmq.abcompanies.store
 Environment=AMQP_USER=roboshop
 Environment=AMQP_PASS=roboshop123
+Environment=MONGO_URL=mongodb://mongodb.abcompanies.store:27017/payment
 
 ExecStart=/usr/local/bin/uwsgi --ini payment.ini
 ExecStop=/bin/kill -9 $MAINPID
