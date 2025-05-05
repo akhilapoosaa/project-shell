@@ -11,6 +11,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"      
 N="\e[0m" 
+MONGODB_HOST=mongodb.abcompanies.store
 
 TIMESTAMP=$(date '+%F-%H-%M-%S') 
 LOGFILE="/tmp/$0-$TIMESTAMP.log"  
@@ -57,7 +58,7 @@ VALIDATE $? "creating app directory"
 #-p option is used to create the directory if it does not exist
 
 #download and extract payment app
-curl -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip  &>> $LOGFILE
+curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip  &>> $LOGFILE
 VALIDATE $? "downloading payment application zip file"
 
 cd /app &>> $LOGFILE
