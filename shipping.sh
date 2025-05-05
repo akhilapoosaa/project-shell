@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 #shipping service setup script
 
 ID=$(id -u)
@@ -53,8 +51,9 @@ mkdir -p /app &>> $LOGFILE
 VALIDATE $? "creating app directory"
 #-p option is used to create the directory if it does not exist
 
-curl -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip  &>> $LOGFILE   
+curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip  &>> $LOGFILE   
 VALIDATE $? "downloading shipping application zip file"
+# -L option is used to follow redirects if the URL is redirected to another URL
 
 cd /app &>> $LOGFILE
 unzip -o /tmp/shipping.zip &>> $LOGFILE
@@ -89,7 +88,7 @@ VALIDATE $? "installing mysql"
 #MySQL is a relational database management system based on SQL (Structured Query Language).
 #It is used to store the data for the shipping application and act as a backend database for the application.
 
-mysql -h mysql.abcompanies.store -uroot -pRoboShop@1 < /app/db/schema.sql &>> $LOGFILE
+mysql -h mysql.abcompanies.store -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
 VALIDATE $? "importing shipping application schema"
 #mysql command is used to connect to the MySQL server and execute the SQL script to create the database and tables for the shipping application
 #-h option is used to specify the host name of the MySQL server
