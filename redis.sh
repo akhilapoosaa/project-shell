@@ -38,6 +38,9 @@ fi
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y 
 VALIDATE $? "installing remi release package"
 
+dnf module disable redis -y
+VALIDATE $? "Disabling default Redis module"
+
 dnf module enable redis:remi-6.2 -y 
 VALIDATE $? "enabling redis module"
 
