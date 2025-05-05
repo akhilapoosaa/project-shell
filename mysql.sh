@@ -58,25 +58,7 @@ VALIDATE $? "securing mysql root password"
 #mysql_secure_installation command is used to secure the mysql installation
 #It will prompt for the root password, which is generated during the installation
 #The password is stored in the /var/log/mysqld.log file
-#The password can be found by running the following command
+#The password can be found by running the following commands
 #grep 'temporary password' /var/log/mysqld.log
 #The password is used to log in to the mysql server for the first time
-
-# Create roboshop database
-mysql -u root -pRoboShop@1 -e "CREATE DATABASE IF NOT EXISTS roboshop;" &>> $LOGFILE
-VALIDATE $? "creating roboshop database"
-
-# Create roboshop user
-mysql -u root -pRoboShop@1 -e "CREATE USER IF NOT EXISTS 'roboshop'@'%' IDENTIFIED BY 'RoboShop@1';" &>> $LOGFILE
-VALIDATE $? "creating roboshop user"
-
-# Grant privileges to roboshop user
-mysql -u root -pRoboShop@1 -e "GRANT ALL PRIVILEGES ON roboshop.* TO 'roboshop'@'%';" &>> $LOGFILE
-VALIDATE $? "granting privileges to roboshop user"
-
-# Load schema into roboshop database
-mysql -u root -pRoboShop@1 roboshop < /app/schema.sql &>> $LOGFILE
-VALIDATE $? "loading schema into roboshop database"
-
-
 
