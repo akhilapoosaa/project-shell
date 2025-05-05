@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#user service setup script
+#web service setup script
 
 ID=$(id -u)
 R="\e[31m"

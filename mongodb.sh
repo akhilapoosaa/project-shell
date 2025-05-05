@@ -11,6 +11,7 @@ N="\e[0m" #reset the color or no color
 
 TIMESTAMP=$(date '+%F-%H-%M-%S') #date command is used to get the current date and time and stores it in the variable TIMESTAMP
 LOGFILE="/tmp/$0-$TIMESTAMP.log"  #stores the log file in the /tmp directory with the name of the script and the timestamp
+SCRIPT_DIR=$(pwd)
 
 echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
@@ -32,7 +33,7 @@ else
     echo -e "$G SUCCESS:: script is running with root access $N"
 fi 
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp $SCRIPT_DIR/mongo.repo  /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? "copying MongoDB repo file" 
 
 dnf install mongodb-org -y &>> $LOGFILE
