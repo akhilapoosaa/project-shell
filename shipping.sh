@@ -66,7 +66,7 @@ VALIDATE $? "building shipping application"
 #package command is used to create the new build artifacts
 
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
-VALIDATE $? "moving shipping application jar file"
+VALIDATE $? "renamingapplication jar file"
 
 cp $SCRIPT_DIR/shipping.service  /etc/systemd/system/shipping.service &>> $LOGFILE
 VALIDATE $? "copying shipping service file to systemd directory"
@@ -84,7 +84,7 @@ VALIDATE $? "starting shipping service"
 #enable command is used to enable the service to start on boot
 
 dnf install mysql -y &>> $LOGFILE
-VALIDATE $? "installing mysql"
+VALIDATE $? "installing mysql client"
 #MySQL is a relational database management system based on SQL (Structured Query Language).
 #It is used to store the data for the shipping application and act as a backend database for the application.
 
