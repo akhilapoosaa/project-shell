@@ -35,14 +35,12 @@ else
     echo -e "$G SUCCESS:: script is running with root access $N"
 fi 
 
-dnf install https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.3-1.el8.remi.noarch.rpm -y
-VALIDATE $? "installing remi release package"
-
-dnf module disable redis -y
-VALIDATE $? "Disabling default Redis module"
-
-dnf module enable redis:remi-6.2 -y 
-VALIDATE $? "enabling redis module"
+#dnf install https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.3-1.el8.remi.noarch.rpm -y
+#VALIDATE $? "installing remi release package"
+#dnf module disable redis -y
+#VALIDATE $? "Disabling default Redis module"
+#dnf module enable redis:remi-6.2 -y 
+#VALIDATE $? "enabling redis module" just remvoing these lines bcz only redis 5 is taking the centos8
 
 dnf install redis -y 
 VALIDATE $? "installing redis"
