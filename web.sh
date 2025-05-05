@@ -48,7 +48,7 @@ rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 #nginx default document root is /usr/share/nginx/html
 VALIDATE $? "removing default nginx website"
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
+curl -o /tmp/web.zip  https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
 VALIDATE $? "downloading web application zip file"
 #curl command is used to download the web application zip file from the s3 bucket
 
