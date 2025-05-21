@@ -58,7 +58,6 @@ VALIDATE $? "downloading shipping application zip file"
 cd /app &>> $LOGFILE
 unzip -o /tmp/shipping.zip &>> $LOGFILE
 VALIDATE $? "unzipping shipping application"
-#-o option is used to overwrite the existing files without prompting
 
 mvn clean package &>> $LOGFILE
 VALIDATE $? "building shipping application"
@@ -79,9 +78,6 @@ VALIDATE $? "enabling shipping service"
 
 systemctl start shipping &>> $LOGFILE
 VALIDATE $? "starting shipping service"
-#systemctl command is used to control the systemd system and service manager
-#daemon-reload command is used to reload the systemd manager configuration
-#enable command is used to enable the service to start on boot
 
 dnf install mysql -y &>> $LOGFILE
 VALIDATE $? "installing mysql client"
@@ -103,8 +99,6 @@ VALIDATE $? "Creating MySQL shipping user"
 #-p option is used to specify the password for the user
 #< operator is used to redirect the input from the SQL script file to the mysql command
 #schema/shipping.sql is the SQL script file that contains the database schema for the shipping application
-#mysql is a command line client for MySQL server
-#mysql is used to execute SQL commands and manage the MySQL server
 
 systemctl restart shipping &>> $LOGFILE
 VALIDATE $? "restarting shipping service"
