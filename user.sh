@@ -97,6 +97,6 @@ VALIDATE $? "installing mongodb client"
 mongo --host $MONGODB_HOST < /app/schema/user.js  &>> $LOGFILE
 #running the mongo command to import the schema file into the mongodb database
 #--host option is used to specify the host name of the mongodb server
-VALIDATE $? "loading user schema into mongodb"  
+VALIDATE $? "loading user schema into the mongodb"  
 
 echo -e "$G user service setup complete! $N" #-e is used to enable the interpretation of backslash escapes
