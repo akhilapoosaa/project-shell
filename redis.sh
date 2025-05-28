@@ -35,7 +35,7 @@ else
     echo -e "$G SUCCESS:: script is running with root access $N"
 fi 
 
-#dnf install https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.3-1.el8.remi.noarch.rpm -y
+#dnf install https://rpms.remirepo.net/enterprise/remi-release-8.7.rpm -y 
 #VALIDATE $? "installing remi release package"
 #dnf module disable redis -y
 #VALIDATE $? "Disabling default Redis module"
