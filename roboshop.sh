@@ -6,7 +6,7 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipp
 ZONE_ID=Z0530618D1B8DOASTNDL # replace your hostedzone ID
 DOMAIN_NAME="abcompanies.store"
 
-for i in "${INSTANCES[@]}" # array of instances looping through each instance 
+for i in "${INSTANCES[@]}" # array of instances looping through each instance
 do
     if [ $i == "mongodb" ] || [ $i == "mysql" ] || [ $i == "shipping" ] # || is used as or 
     then
@@ -16,7 +16,7 @@ do
     fi
 
     IP_ADDRESS=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE 
-    --security-group-ids sg-087e7afb3a936fce7 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]"
+    --security-group-ids sg-0df99ea72b1922f0a --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]"
     --query 'Instances[0].PrivateIpAddress' --output text)
     echo "$i: $IP_ADDRESS"
 
@@ -27,7 +27,7 @@ do
     {
         "Comment": "Creating a record set for cognito endpoint"
         ,"Changes": [{
-        "Action"              : "UPSERT"
+        "Action"              : "UPSERT" 
         ,"ResourceRecordSet"  : {
             "Name"              : "'$i'.'$DOMAIN_NAME'"
             ,"Type"             : "A"
@@ -40,3 +40,5 @@ do
     }
         '
 done
+
+ # UPSERT is used to create or update the record
