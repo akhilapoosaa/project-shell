@@ -18,7 +18,7 @@ exec &>$LOGFILE #executes the command and redirects the output to the log file
 
 echo "script started executing at $TIMESTAMP" 
 
-VALIDATE(){
+VALIDATE() {
     if [ $1 -ne 0 ]  
     then 
         echo -e "$2 ... $R FAILED $N" 
