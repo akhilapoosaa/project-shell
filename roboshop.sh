@@ -2,7 +2,7 @@
 
 AMI=ami-0b4f379183e5706b9 #this keeps on changing
 SG_ID=sg-0df99ea72b1922f0a #replace with your SG ID
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web")
+INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web" "dispatch")
 ZONE_ID=Z0530618D1B8DOASTNDL # replace your hostedzone ID
 DOMAIN_NAME="abcompanies.store"
 
